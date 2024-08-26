@@ -4,6 +4,10 @@ A minimal command-line application demonstrating GPIO control on a Raspberry Pi 
 
 Tested on **Raspberry Pi 5** running **Raspberry Pi OS (64-bit)**.
 
+## Demo
+
+[![Video Demo](https://i3.ytimg.com/vi/NhQ8_xI-70U/maxresdefault.jpg)](https://youtu.be/NhQ8_xI-70U)
+
 ## Components
 
 - LED
