@@ -39,7 +39,7 @@ final _libgpiod = DynamicLibrary.open('libgpiod.so.2');
 class Libgpiod {
   Libgpiod._();
 
-  static final Libgpiod _instance = Libgpiod._();
+  static final _instance = Libgpiod._();
 
   factory Libgpiod() => _instance;
 

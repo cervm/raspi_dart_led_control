@@ -19,7 +19,7 @@ class GpioManager {
     }
   }
 
-  static final GpioManager _instance = GpioManager._();
+  static final _instance = GpioManager._();
 
   factory GpioManager() => _instance;
 
@@ -28,7 +28,8 @@ class GpioManager {
 
   void allocateInput(int pin) {
     try {
-      final line = _allocatePin(pin);
+      _allocatePin(pin);
+      final line = _getLine(pin);
       if (Libgpiod().requestInput(line, 'dart_in_$pin') != 0) {
         throw Exception('Failed to request input line $pin');
       }
@@ -40,7 +41,8 @@ class GpioManager {
 
   void allocateOutput(int pin, int initialValue) {
     try {
-      final line = _allocatePin(pin);
+      _allocatePin(pin);
+      final line = _getLine(pin);
       if (Libgpiod().requestOutput(line, 'dart_out_$pin', initialValue) != 0) {
         throw Exception('Failed to request output line $pin');
       }
@@ -70,13 +72,12 @@ class GpioManager {
     }
   }
 
-  Line _allocatePin(int pin) {
+  void _allocatePin(int pin) {
     if (_allocatedPins.keys.contains(pin)) {
       throw StateError('GPIO pin $pin already allocated');
     }
     final line = Libgpiod().getLine(_chip, pin);
     _allocatedPins[pin] = line;
-    return line;
   }
 
   Line _getLine(int pin) {
